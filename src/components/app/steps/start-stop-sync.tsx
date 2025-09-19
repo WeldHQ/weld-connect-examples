@@ -66,7 +66,9 @@ export function StartStopSyncContainer(props: {
           <Button
             onClick={() => startMutation.mutate({ eltSyncId, apiKey })}
             disabled={
-              eltSyncQuery.data?.status === "RUNNING" || eltSyncQuery.isPending
+              eltSyncQuery.data?.status === "RUNNING" ||
+              eltSyncQuery.isPending ||
+              startMutation.isPending
             }
           >
             Start
@@ -76,7 +78,8 @@ export function StartStopSyncContainer(props: {
               onClick={() => stopMutation.mutate({ eltSyncId, apiKey })}
               disabled={
                 eltSyncQuery.data?.status !== "RUNNING" ||
-                eltSyncQuery.isPending
+                eltSyncQuery.isPending ||
+                stopMutation.isPending
               }
               variant="destructive"
             >

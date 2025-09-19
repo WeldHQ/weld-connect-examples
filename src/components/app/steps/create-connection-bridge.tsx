@@ -58,10 +58,11 @@ export function CreateConnectionBridgeContainer(props: {
       alert("Please select an integration");
       return;
     }
+    const redirectUri = `${window.location.origin}${router.basepath}${router.basepath.endsWith("/") ? "" : "/"}authorize-callback.html`;
     mutate({
       integrationId: selectedIntegrationId,
       label: connectionLabel,
-      redirectUri: `${window.location.origin}${router.basepath}authorize-callback.html`,
+      redirectUri,
       apiKey,
     });
   };

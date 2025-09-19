@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Auth Callback Page</title>
+  </head>
+  <body class="bg-white text-gray-800">
+    <script type="text/javascript">
+        const connectionId = new URLSearchParams(window.location.search).get("connectionId");
+        if (!connectionId) {
+            alert("No connectionId provided in query params");
+        }
+        if (!window.opener) {
+            alert("No window opener found");
+        }
+        window.opener.postMessage({ type: "auth-success", connectionId }, window.location.origin);       
+        window.close();
+    </script>
+  </body>
+</html>

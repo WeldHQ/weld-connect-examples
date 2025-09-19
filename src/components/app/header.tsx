@@ -23,9 +23,12 @@ export default function Header() {
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
               placeholder="Enter API key"
-              autoComplete="off"
               autoFocus
               defaultMask
+              autoComplete="off"
+              data-1p-ignore="true"
+              data-lpignore="true"
+              data-dashlane-ignore="true"
             />
           </div>
           <div>

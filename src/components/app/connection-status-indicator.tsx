@@ -1,4 +1,6 @@
 import { CircleCheck, LoaderCircle, Unplug } from "lucide-react";
+import { useEffect } from "react";
+import { toast } from "sonner";
 
 import {
   Tooltip,
@@ -14,12 +16,19 @@ export function ConnectionStatus() {
   const { data: isValid, isFetching } = useQuery({
     queryKey: ["validate-api-key", apiKey],
     queryFn: async () => {
+      if (!apiKey.trim()) return false;
       await listIntegrations({ apiKey });
       return true;
     },
     retry: false,
     refetchOnWindowFocus: true,
   });
+
+  useEffect(() => {
+    if (isValid) {
+      toast.success("Successfully connected to Weld Connect API.");
+    }
+  }, [isValid]);
 
   let status = {
     icon: <Unplug className="text-red-600" />,

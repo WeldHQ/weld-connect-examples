@@ -30,6 +30,7 @@ export function CreateConnectionBridgeContainer(props: {
   const { data: integrationsData } = useQuery({
     queryKey: ["list-integrations", apiKey],
     queryFn: async () => {
+      if (!apiKey.trim()) return { data: [] };
       return await listIntegrations({ apiKey });
     },
     retry: false,

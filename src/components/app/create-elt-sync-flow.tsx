@@ -18,7 +18,7 @@ import {
   SetupStateContextProvider,
   type SetupStateContextType,
 } from "@/lib/setup-state-context";
-import { CircleCheck, RotateCcw } from "lucide-react";
+import { CircleCheck, Info, RotateCcw } from "lucide-react";
 import { AddSourceStreamsContainer } from "./steps/add-source-streams";
 import { AuthorizeConnectionContainer } from "./steps/authorize-connection";
 import { CreateConnectionBridgeContainer } from "./steps/create-connection-bridge";
@@ -155,6 +155,7 @@ const stateReset = (): SetupStateContextType => ({
 });
 
 import { useEffect, useRef } from "react";
+import { Alert, AlertTitle } from "../ui/alert";
 
 export function CreateEltSyncFlowContainer() {
   const [state, setState] = useState<SetupStateContextType>(() => stateReset());
@@ -191,6 +192,11 @@ export function CreateEltSyncFlowContainer() {
   return (
     <SetupStateContextProvider value={state}>
       <div className="px-6 md:px-12 py-8 space-y-12 mx-auto max-w-4xl">
+        <div className="text-sm text-muted-foreground px-8">
+          Follow the steps below to create and start an ELT sync with the Weld
+          Connect API. Make sure to create an API key in your Weld account and
+          paste it in above.
+        </div>
         {steps.map((step, index) => {
           return (
             <div

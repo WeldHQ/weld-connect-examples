@@ -6,7 +6,11 @@ This project is a React application that demonstrates how to use the Weld Connec
 
 You will need a Weld account and an API key to run this application. You can sign up for a free account at [Weld](https://weld.app).
 
-## Getting Started
+## Demo
+
+The examples are running live at: [https://weldhq.github.io/weld-connect-examples/](https://weldhq.github.io/weld-connect-examples/)
+
+## Running the application locally
 
 To run this application:
 

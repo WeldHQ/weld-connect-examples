@@ -12,6 +12,7 @@ import { listIntegrations } from "@/lib/api/list-integrations";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { LoaderCircle } from "lucide-react";
 
+import { useRouter } from "@tanstack/react-router";
 import { IntegrationSelect } from "../integration-select";
 
 export function CreateConnectionBridgeContainer(props: {
@@ -21,6 +22,8 @@ export function CreateConnectionBridgeContainer(props: {
   }) => void;
 }) {
   const apiKey = useApiKeyValue();
+
+  const router = useRouter();
 
   const [selectedIntegrationId, setSelectedIntegrationId] = useState<
     string | undefined
@@ -58,7 +61,7 @@ export function CreateConnectionBridgeContainer(props: {
     mutate({
       integrationId: selectedIntegrationId,
       label: connectionLabel,
-      redirectUri: `${window.location.origin}/authorize-callback.html`,
+      redirectUri: `${window.location.origin}${router.basepath}authorize-callback.html`,
       apiKey,
     });
   };

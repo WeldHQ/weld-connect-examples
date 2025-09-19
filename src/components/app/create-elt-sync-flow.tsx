@@ -18,7 +18,7 @@ import {
   SetupStateContextProvider,
   type SetupStateContextType,
 } from "@/lib/setup-state-context";
-import { CircleCheck, Info, RotateCcw } from "lucide-react";
+import { CircleCheck, RotateCcw } from "lucide-react";
 import { AddSourceStreamsContainer } from "./steps/add-source-streams";
 import { AuthorizeConnectionContainer } from "./steps/authorize-connection";
 import { CreateConnectionBridgeContainer } from "./steps/create-connection-bridge";
@@ -155,7 +155,6 @@ const stateReset = (): SetupStateContextType => ({
 });
 
 import { useEffect, useRef } from "react";
-import { Alert, AlertTitle } from "../ui/alert";
 
 export function CreateEltSyncFlowContainer() {
   const [state, setState] = useState<SetupStateContextType>(() => stateReset());

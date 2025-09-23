@@ -165,7 +165,7 @@ export function CreateEltSyncFlowContainer() {
       .findIndex((step) => {
         return step.validateProps(state);
       });
-    return startIndex === -1 ? 0 : startIndex;
+    return startIndex === -1 ? 0 : steps.length - 1 - startIndex;
   });
   console.log({ currentIndex, state });
 

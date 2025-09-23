@@ -9,7 +9,7 @@ export type SetupStateContextType = {
   connectionId?: string;
   connectionBridge?: CreateConnectionBridgeResponse;
   eltSync?: CreateEltSyncResponse;
-  sourceStreams?: AddSourceStreamsResponse;
+  sourceStreams?: AddSourceStreamsResponse["source_streams"];
 };
 
 const context = createContext<SetupStateContextType | null>(null);

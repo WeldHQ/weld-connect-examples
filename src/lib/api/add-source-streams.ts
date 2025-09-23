@@ -24,19 +24,19 @@ export type SourceStream = {
 };
 
 export type AddSourceStreamsResponse = {
-  streams: SourceStream[];
+  source_streams: SourceStream[];
 };
 
 export const addSourceStreams = async (params: {
   eltSyncId: string;
-  streams: SourceStreamParam[];
+  sourceStreams: SourceStreamParam[];
   apiKey: string;
 }) => {
   return post<AddSourceStreamsResponse>(
     `/elt_syncs/${params.eltSyncId}/source_streams`,
     params.apiKey,
     {
-      source_streams: params.streams,
+      source_streams: params.sourceStreams,
     },
   );
 };

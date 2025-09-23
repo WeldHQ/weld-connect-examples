@@ -29,7 +29,9 @@ const createEmptyStreamConfig = (streamName: string): SourceStreamParam => ({
 
 export function AddSourceStreamsContainer(props: {
   eltSync: CreateEltSyncResponse;
-  onSuccess: (state: { sourceStreams: AddSourceStreamsResponse }) => void;
+  onSuccess: (state: {
+    sourceStreams: AddSourceStreamsResponse["source_streams"];
+  }) => void;
 }) {
   const eltSyncId = props.eltSync.id;
   const apiKey = useApiKeyValue();
@@ -116,14 +118,14 @@ export function AddSourceStreamsContainer(props: {
       console.error("Error adding source streams:", error);
     },
     onSuccess: (data) => {
-      props.onSuccess({ sourceStreams: data });
+      props.onSuccess({ sourceStreams: data.source_streams });
     },
   });
 
   const handleAddStreams = () => {
     try {
       const config = JSON.parse(rawConfig) as SourceStreamParam[];
-      mutate({ eltSyncId, apiKey, streams: config });
+      mutate({ eltSyncId, apiKey, sourceStreams: config });
     } catch (e) {
       setRawConfigError((e as Error).message);
     }
@@ -132,8 +134,8 @@ export function AddSourceStreamsContainer(props: {
   return (
     <div className="rounded-md border overflow-clip">
       <div className="flex flex-col">
-        <div className="grid md:grid-cols-2 min-h-96 pt-6">
-          <div className="px-6">
+        <div className="grid md:grid-cols-2 min-h-96 pt-6 px-6 gap-6">
+          <div className="">
             <div className="grid w-full items-center gap-3">
               <Label>Available Source Streams</Label>
               <ul className="py-1 overflow-auto border rounded-md max-h-96">
@@ -173,7 +175,7 @@ export function AddSourceStreamsContainer(props: {
               </ul>
             </div>
           </div>
-          <div className="px-6 flex flex-col">
+          <div className=" flex flex-col">
             <div className="grid w-full items-center gap-3">
               <Label>Configuration</Label>
               <div className="space-y-2">

@@ -18,7 +18,7 @@ export const listAvailableSourceStreams = async (params: {
   apiKey: string;
 }) => {
   return get<ListAvailableSourceStreamsResponse>(
-    `/elt_syncs/${params.eltSyncId}/source_streams`,
+    `/elt_syncs/${params.eltSyncId}/available_source_streams`,
     params.apiKey,
   );
 };

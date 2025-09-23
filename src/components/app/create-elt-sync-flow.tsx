@@ -23,7 +23,7 @@ import { AddSourceStreamsContainer } from "./steps/add-source-streams";
 import { AuthorizeConnectionContainer } from "./steps/authorize-connection";
 import { CreateConnectionBridgeContainer } from "./steps/create-connection-bridge";
 import { CreateELTSyncContainer } from "./steps/create-elt-sync";
-import { StartStopSyncContainer } from "./steps/start-stop-sync";
+import { EnableDisableSyncContainer } from "./steps/enable-disable-sync";
 
 const steps = [
   {
@@ -122,12 +122,12 @@ const steps = [
         <HoverCard openDelay={100}>
           <HoverCardTrigger asChild>
             <Badge variant="outline">
-              <strong>{state.sourceStreams.streams.length}</strong> streams
+              <strong>{state.sourceStreams.length}</strong> streams
             </Badge>
           </HoverCardTrigger>
           <HoverCardContent>
             <ul className="space-y-0.5 text-sm">
-              {state.sourceStreams.streams.map((stream) => {
+              {state.sourceStreams.map((stream) => {
                 return <li key={stream.name}>{stream.name}</li>;
               })}
             </ul>
@@ -138,7 +138,7 @@ const steps = [
   },
   {
     title: "Start the Sync",
-    component: StartStopSyncContainer,
+    component: EnableDisableSyncContainer,
     validateProps: (
       state: SetupStateContextType,
     ): state is SetupStateContextType & {
@@ -158,7 +158,16 @@ import { useEffect, useRef } from "react";
 
 export function CreateEltSyncFlowContainer() {
   const [state, setState] = useState<SetupStateContextType>(() => stateReset());
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(() => {
+    const startIndex = steps
+      .slice()
+      .reverse()
+      .findIndex((step) => {
+        return step.validateProps(state);
+      });
+    return startIndex === -1 ? 0 : startIndex;
+  });
+  console.log({ currentIndex, state });
 
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
 

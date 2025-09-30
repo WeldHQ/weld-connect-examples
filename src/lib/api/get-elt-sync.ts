@@ -11,7 +11,7 @@ export type GetELTSyncResponse = {
   created_at: string;
   updated_at: string;
   orchestration_workflow_id: string;
-  streams: {
+  source_streams: {
     id: string;
     elt_sync_id: string;
     name: string;

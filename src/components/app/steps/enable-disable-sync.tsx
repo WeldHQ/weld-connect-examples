@@ -93,7 +93,9 @@ export function EnableDisableSyncContainer(props: {
           )}
         </div>
         <div>
-          {status === "RUNNING" && <EltSyncStatus eltSyncId={eltSyncId} />}
+          {status === "RUNNING" && eltSyncQuery.data && (
+            <EltSyncStatus eltSync={eltSyncQuery.data} />
+          )}
         </div>
       </div>
     </div>

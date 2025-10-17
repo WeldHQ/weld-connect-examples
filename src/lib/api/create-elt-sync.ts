@@ -21,7 +21,6 @@ export const createEltSync = async (params: {
   connectionId: string;
   destinationSchemaName: string;
   eltSettings: Record<string, unknown>;
-  startDate?: Date;
   syncInterval: string;
   apiKey: string;
 }) => {
@@ -29,7 +28,6 @@ export const createEltSync = async (params: {
     connection_id: params.connectionId,
     destination_schema_name: params.destinationSchemaName,
     elt_settings: params.eltSettings,
-    start_date: params.startDate?.toISOString(),
     sync_interval: params.syncInterval,
   });
 };

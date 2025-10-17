@@ -17,16 +17,19 @@ export function JsonForm(props: {
     props.initialData ?? {},
   );
   return (
-    <JsonForms
-      schema={props.schema}
-      data={data}
-      renderers={materialRenderers}
-      cells={materialCells}
-      validationMode="ValidateAndShow"
-      onChange={({ data, errors }) => {
-        setData(data);
-        props.onChange?.(data, errors || []);
-      }}
-    />
+    <div className="json-form-container">
+      <JsonForms
+        schema={props.schema}
+        data={data}
+        renderers={materialRenderers}
+        cells={materialCells}
+        validationMode="ValidateAndShow"
+        onChange={({ data, errors }) => {
+          setData(data);
+          props.onChange?.(data, errors || []);
+        }}
+      />
+      <style>{".json-form-container > .MuiGrid-root { gap: 1.5rem; }"}</style>
+    </div>
   );
 }

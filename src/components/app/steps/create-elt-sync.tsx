@@ -1,7 +1,6 @@
 import type { ErrorObject } from "ajv";
 import { useState } from "react";
 
-import { DateSelect } from "@/components/shared/date-select";
 import { JsonForm } from "@/components/shared/json-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -45,7 +44,7 @@ export function CreateELTSyncContainer(props: {
   const [formErrors, setFormErrors] = useState<ErrorObject[]>([]);
 
   const [syncInterval, setSyncInterval] = useState("0 0 * * *");
-  const [startDate, setStartDate] = useState<Date | undefined>(new Date());
+
   const [destinationSchemaName, setDestinationSchemaName] = useState(
     state.integrationId
       ? generateDestinationSchemaName(state.integrationId)
@@ -67,7 +66,6 @@ export function CreateELTSyncContainer(props: {
       connectionId,
       destinationSchemaName,
       eltSettings: formData,
-      startDate,
       syncInterval,
       apiKey,
     });
@@ -89,8 +87,8 @@ export function CreateELTSyncContainer(props: {
           {isLoadingEltSettings ? (
             <div>Loading ELT settings...</div>
           ) : eltSettingsSchema ? (
-            <div className="grid max-w-sm items-center gap-4">
-              <Label htmlFor="integration-select">ELT Settings</Label>
+            <div className="max-w-md">
+              <h3 className="font-medium mb-6">ELT Settings</h3>
               <JsonForm
                 schema={eltSettingsSchema}
                 onChange={(data, errors) => {
@@ -113,10 +111,6 @@ export function CreateELTSyncContainer(props: {
                 value={syncInterval}
                 onChange={setSyncInterval}
               />
-            </div>
-            <div className="grid max-w-sm items-center gap-3">
-              <Label htmlFor="start-date">Start Date</Label>
-              <DateSelect value={startDate} onChange={setStartDate} />
             </div>
             <div className="grid max-w-sm items-center gap-3">
               <Label htmlFor="destination-schema">Destination Schema</Label>
